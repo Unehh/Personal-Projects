@@ -6,4 +6,6 @@ public class Action {
     private JButton button;
     private int x;
     private int y;
+
+
 }
