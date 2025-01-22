@@ -7,7 +7,7 @@ import static org.example.Calculator.removeLast;
 import static org.example.Calculator.trimmer;
 
 public class CalculatorAction extends Action{
-    private static String numberVal = "", numberSaved = "", NumberAfterCalculations = "";
+    private static String numberVal = "", numberSaved = "", result = "";
     static Character calcCharacter = '\0'; //Character is Empty
     boolean isNegative = false, isFloat = false;
     private String action;
@@ -48,11 +48,11 @@ public class CalculatorAction extends Action{
         }
         switch (action){
             case "Add Number":
-                if(!NumberAfterCalculations.isEmpty()) {
+                if(!result.isEmpty()) {
                     numberSaved = "";
                     calcCharacter = '\0';
                     numberVal = "";
-                    NumberAfterCalculations = "";
+                    result = "";
                 }
                 if (numberVal.equals("0") || numberVal.isEmpty()) {
                     numberVal = buttonVal;
@@ -102,16 +102,16 @@ public class CalculatorAction extends Action{
                 }
                 break;
             case "Squared":
-                if (!NumberAfterCalculations.isEmpty()) {
-                    numberVal = NumberAfterCalculations;
+                if (!result.isEmpty()) {
+                    numberVal = result;
                     numberSaved = "";
                 }
                 numberVal = String.valueOf(Double.valueOf(numberVal) * Double.valueOf(numberVal));
                 numberVal = trimmer(numberVal);
                 break;
             case "Square Root":
-                if (!NumberAfterCalculations.isEmpty()) {
-                    numberVal = NumberAfterCalculations;
+                if (!result.isEmpty()) {
+                    numberVal = result;
                     numberSaved = "";
                 }
                 numberVal = String.valueOf(Math.sqrt(Double.valueOf(numberVal)));
@@ -120,11 +120,11 @@ public class CalculatorAction extends Action{
             case "Turn into decimal":
 
                 if (!isFloat) {
-                    if(!NumberAfterCalculations.isEmpty()) {
+                    if(!result.isEmpty()) {
                         numberSaved = "";
                         calcCharacter = '\0';
                         numberVal = "0";
-                        NumberAfterCalculations = "";
+                        result = "";
                     }
                     numberVal = numberVal + ".";
                 }
@@ -176,7 +176,7 @@ public class CalculatorAction extends Action{
                 numberVal = "";
                 break;
             case "Equals":
-                NumberAfterCalculations = Calculate(numberSaved, numberVal, calcCharacter);
+                result = Calculate(numberSaved, numberVal, calcCharacter);
                 break;
                 default:
                 throw new IllegalStateException("Unexpected value: " + action);
@@ -191,9 +191,9 @@ public class CalculatorAction extends Action{
             }
         }
         label.setText(numberSaved + calcCharacter + numberVal);
-        if(!NumberAfterCalculations.isEmpty()) {
-            label.setText(numberSaved + calcCharacter + numberVal + "=" + NumberAfterCalculations);
-            numberSaved = NumberAfterCalculations;
+        if(!result.isEmpty()) {
+            label.setText(numberSaved + calcCharacter + numberVal + "=" + result);
+            numberSaved = result;
         }
     }
 }
