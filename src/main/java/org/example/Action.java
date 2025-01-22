@@ -5,17 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 abstract class Action {
-
-
-    Action(String label, ActionListener actionListener, Frame frame){
+    private JButton button;
+    Action(String label, ActionListener actionListener, JFrame frame, GridBagConstraints gridConstraint, int gridX, int gridY){
         button= new JButton(label);
         button.addActionListener(actionListener);
-        frame.add(button0,c);
-        c.gridx =2;
-        c.gridy =6;
+        frame.add(button,gridConstraint);
+        gridConstraint.gridx = gridX;
+        gridConstraint.gridy = gridY;
+        frame.add(button, gridConstraint);
     }
-
-    private JButton button;
-
     abstract void performAction();
 }
