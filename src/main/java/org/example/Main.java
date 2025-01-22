@@ -11,7 +11,7 @@ class Calculator implements ActionListener {
     boolean isMinus = false, isFloat = false;
     char character = 'e';
     GridBagConstraints gridConstraint = new GridBagConstraints();
-    JButton button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonPercent, buttonCE, buttonC, buttonBackSpace, button1x, buttonnumberMain, buttonSquareRoot, buttonDivide, buttonX, buttonMinus, buttonPlus, buttonSwitch, buttonEquals, buttonDot;
+    JButton button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonPercent, buttonCE, buttonC, buttonBackSpace, button1x, buttonSquared, buttonSquareRoot, buttonDivide, buttonX, buttonMinus, buttonPlus, buttonSwitch, buttonEquals, buttonDot;
 
     public static String removeLast(String original) {
         return original.substring(0, original.length() - 1);
@@ -35,8 +35,8 @@ class Calculator implements ActionListener {
         }
         return x;
     }
-
     Calculator() {
+
         JFrame frame = new JFrame("Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
@@ -54,135 +54,38 @@ class Calculator implements ActionListener {
         gridConstraint.gridx = 0;
         gridConstraint.gridy = 0;
         frame.add(label, gridConstraint);
-        buttonPercent = new JButton("%");
-        buttonPercent.addActionListener(this);
-        buttonCE = new JButton("CE");
-        buttonCE.addActionListener(this);
-        buttonC = new JButton("C");
-        buttonC.addActionListener(this);
-        buttonBackSpace = new JButton("backspace");
-        buttonBackSpace.addActionListener(this);
-        button1x = new JButton("1/x");
-        button1x.addActionListener(this);
-        buttonnumberMain = new JButton("Squared");
-        buttonnumberMain.addActionListener(this);
-        buttonSquareRoot = new JButton("Root");
-        buttonSquareRoot.addActionListener(this);
-        buttonDivide = new JButton("/");
-        buttonDivide.addActionListener(this);
-        button1 = new JButton("1");
-        button1.addActionListener(this);
-        button2 = new JButton("2");
-        button2.addActionListener(this);
-        button3 = new JButton("3");
-        button3.addActionListener(this);
-        buttonX = new JButton("x");
-        buttonX.addActionListener(this);
-        button4 = new JButton("4");
-        button4.addActionListener(this);
-        button5 = new JButton("5");
-        button5.addActionListener(this);
-        button6 = new JButton("6");
-        button6.addActionListener(this);
-        buttonMinus = new JButton("-");
-        buttonMinus.addActionListener(this);
-        button7 = new JButton("7");
-        button7.addActionListener(this);
-        button8 = new JButton("8");
-        button8.addActionListener(this);
-        button9 = new JButton("9");
-        button9.addActionListener(this);
-        buttonPlus = new JButton("+");
-        buttonPlus.addActionListener(this);
-        buttonSwitch = new JButton("+/-");
-        buttonSwitch.addActionListener(this);
-        button0 = new JButton("0");
-        button0.addActionListener(this);
-        buttonDot = new JButton(".");
-        buttonDot.addActionListener(this);
-        buttonEquals = new JButton("=");
-        buttonEquals.addActionListener(this);
         gridConstraint.gridwidth = 1;
-        gridConstraint.gridx = 0;
-        gridConstraint.gridy = 1;
-        frame.add(buttonPercent, gridConstraint);
-        gridConstraint.gridx = 1;
-        gridConstraint.gridy = 1;
-        frame.add(buttonCE, gridConstraint);
-        gridConstraint.gridx = 2;
-        gridConstraint.gridy = 1;
-        frame.add(buttonC, gridConstraint);
-        gridConstraint.gridx = 3;
-        gridConstraint.gridy = 1;
-        frame.add(buttonBackSpace, gridConstraint);
-        gridConstraint.gridx = 0;
-        gridConstraint.gridy = 2;
-        frame.add(button1x, gridConstraint);
-        gridConstraint.gridx = 1;
-        gridConstraint.gridy = 2;
-        frame.add(buttonnumberMain, gridConstraint);
-        gridConstraint.gridx = 2;
-        gridConstraint.gridy = 2;
-        frame.add(buttonSquareRoot, gridConstraint);
-        gridConstraint.gridx = 3;
-        gridConstraint.gridy = 2;
-        frame.add(buttonDivide, gridConstraint);
-        gridConstraint.gridx = 0;
-        gridConstraint.gridy = 3;
-        frame.add(button7, gridConstraint);
-        gridConstraint.gridx = 1;
-        gridConstraint.gridy = 3;
-        frame.add(button8, gridConstraint);
-        gridConstraint.gridx = 2;
-        gridConstraint.gridy = 3;
-        frame.add(button9, gridConstraint);
-        gridConstraint.gridx = 3;
-        gridConstraint.gridy = 3;
-        frame.add(buttonX, gridConstraint);
-        gridConstraint.gridx = 0;
-        gridConstraint.gridy = 4;
-        frame.add(button4, gridConstraint);
-        gridConstraint.gridx = 1;
-        gridConstraint.gridy = 4;
-        frame.add(button5, gridConstraint);
-        gridConstraint.gridx = 2;
-        gridConstraint.gridy = 4;
-        frame.add(button6, gridConstraint);
-        gridConstraint.gridx = 3;
-        gridConstraint.gridy = 4;
-        frame.add(buttonMinus, gridConstraint);
-        gridConstraint.gridx = 0;
-        gridConstraint.gridy = 5;
-        frame.add(button1, gridConstraint);
-        gridConstraint.gridx = 1;
-        gridConstraint.gridy = 5;
-        frame.add(button2, gridConstraint);
-        gridConstraint.gridx = 2;
-        gridConstraint.gridy = 5;
-        frame.add(button3, gridConstraint);
-        gridConstraint.gridx = 3;
-        gridConstraint.gridy = 5;
-        frame.add(buttonPlus, gridConstraint);
-        gridConstraint.gridx = 0;
-        gridConstraint.gridy = 6;
-        frame.add(buttonSwitch, gridConstraint);
-        gridConstraint.gridx = 1;
-        gridConstraint.gridy = 6;
-        frame.add(button0, gridConstraint);
-        gridConstraint.gridx = 2;
-        gridConstraint.gridy = 6;
-        frame.add(buttonDot, gridConstraint);
-        gridConstraint.gridx = 3;
-        gridConstraint.gridy = 6;
-        frame.add(buttonEquals, gridConstraint);
-
+        new CalculatorAction("%", frame, gridConstraint, 0, 1, "Percent");
+        new CalculatorAction("CE", frame, gridConstraint, 1, 1, "Clear Entry");
+        new CalculatorAction("C", frame, gridConstraint, 2, 1, "Clear");
+        new CalculatorAction("⌫", frame, gridConstraint, 3, 1, "Backspace");
+        new CalculatorAction("1/x", frame, gridConstraint, 0, 2, "Decimal Number");
+        new CalculatorAction("x²", frame, gridConstraint, 1, 2, "squared");
+        new CalculatorAction("√", frame, gridConstraint, 2, 2, "square root");
+        new CalculatorAction("/", frame, gridConstraint, 3, 2, "divide");
+        new CalculatorAction("7", frame, gridConstraint, 0, 3, "Add Number");
+        new CalculatorAction("8", frame, gridConstraint, 1, 3, "Add Number");
+        new CalculatorAction("9", frame, gridConstraint, 2, 3, "Add Number");
+        new CalculatorAction("x", frame, gridConstraint, 3, 3, "Multiply");
+        new CalculatorAction("4", frame, gridConstraint, 0, 4, "Add Number");
+        new CalculatorAction("5", frame, gridConstraint, 1, 4, "Add Number");
+        new CalculatorAction("6", frame, gridConstraint, 2, 4, "Add Number");
+        new CalculatorAction("-", frame, gridConstraint, 3, 4, "Subtraction");
+        new CalculatorAction("1", frame, gridConstraint, 0, 5, "Add Number");
+        new CalculatorAction("2", frame, gridConstraint, 1, 5, "Add Number");
+        new CalculatorAction("3", frame, gridConstraint, 2, 5, "Add Number");
+        new CalculatorAction("+", frame, gridConstraint, 3, 5, "Add");
+        new CalculatorAction("+/-", frame, gridConstraint, 0, 6, "Switch");
+        new CalculatorAction("0", frame, gridConstraint, 1, 6, "Add Number");
+        new CalculatorAction(".", frame, gridConstraint, 2, 6, "turn into decimal");
+        new CalculatorAction("=", frame, gridConstraint, 3, 6, "equals");
         frame.setVisible(true);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(((JButton) e.getSource()).getText());
+
         if (numberVariable != "") {
             if (numberVariable.charAt(0) == '-') {
                 isMinus = true;
@@ -326,7 +229,7 @@ class Calculator implements ActionListener {
                 }
             } else numberVariable = "0";
         }
-        if (e.getSource() == buttonnumberMain) {
+        if (e.getSource() == buttonSquared) {
             if (equals != "") {
                 numberVariable = equals;
                 numberMain = "";
