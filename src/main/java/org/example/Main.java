@@ -2,14 +2,13 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-class Calculator implements ActionListener {
-    String numberVariable = "0", numberMain = "", equals = "", temp1 = "", temp2 = "";
+
+class Calculator {
+    String numberMain = "", equals = "", temp1 = "", temp2 = "";
     JLabel label;
     boolean isMinus = false, isFloat = false;
-    char character = 'e';
+    Character character = '\0';
     GridBagConstraints gridConstraint = new GridBagConstraints();
     JButton button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonPercent, buttonCE, buttonC, buttonBackSpace, button1x, buttonSquared, buttonSquareRoot, buttonDivide, buttonX, buttonMinus, buttonPlus, buttonSwitch, buttonEquals, buttonDot;
 
@@ -17,23 +16,23 @@ class Calculator implements ActionListener {
         return original.substring(0, original.length() - 1);
     }
 
-    public static String trimmer(String x) {
+    public static String trimmer(String trimmedNumber) {
         boolean isFloat = false;
-        for (int i = 0; i < x.length(); i++) {
-            if (x.charAt(i) == '.') {
+        for (int i = 0; i < trimmedNumber.length(); i++) {
+            if (trimmedNumber.charAt(i) == '.') {
                 isFloat = true;
             }
         }
         if (isFloat) {
-            while (x.charAt(x.length() - 1) == '0' || x.charAt(x.length() - 1) == '.') {
-                if (x.charAt(x.length() - 1) == '.') {
-                    x = removeLast(x);
+            while (trimmedNumber.charAt(trimmedNumber.length() - 1) == '0' || trimmedNumber.charAt(trimmedNumber.length() - 1) == '.') {
+                if (trimmedNumber.charAt(trimmedNumber.length() - 1) == '.') {
+                    trimmedNumber = removeLast(trimmedNumber);
                     break;
                 }
-                x = removeLast(x);
+                trimmedNumber = removeLast(trimmedNumber);
             }
         }
-        return x;
+        return trimmedNumber;
     }
     Calculator() {
 
@@ -55,47 +54,47 @@ class Calculator implements ActionListener {
         gridConstraint.gridy = 0;
         frame.add(label, gridConstraint);
         gridConstraint.gridwidth = 1;
-        new CalculatorAction("%", frame, gridConstraint, 0, 1, "Percent");
-        new CalculatorAction("CE", frame, gridConstraint, 1, 1, "Clear Entry");
-        new CalculatorAction("C", frame, gridConstraint, 2, 1, "Clear");
-        new CalculatorAction("⌫", frame, gridConstraint, 3, 1, "Backspace");
-        new CalculatorAction("1/x", frame, gridConstraint, 0, 2, "Decimal Number");
-        new CalculatorAction("x²", frame, gridConstraint, 1, 2, "squared");
-        new CalculatorAction("√", frame, gridConstraint, 2, 2, "square root");
-        new CalculatorAction("/", frame, gridConstraint, 3, 2, "divide");
-        new CalculatorAction("7", frame, gridConstraint, 0, 3, "Add Number");
-        new CalculatorAction("8", frame, gridConstraint, 1, 3, "Add Number");
-        new CalculatorAction("9", frame, gridConstraint, 2, 3, "Add Number");
-        new CalculatorAction("x", frame, gridConstraint, 3, 3, "Multiply");
-        new CalculatorAction("4", frame, gridConstraint, 0, 4, "Add Number");
-        new CalculatorAction("5", frame, gridConstraint, 1, 4, "Add Number");
-        new CalculatorAction("6", frame, gridConstraint, 2, 4, "Add Number");
-        new CalculatorAction("-", frame, gridConstraint, 3, 4, "Subtraction");
-        new CalculatorAction("1", frame, gridConstraint, 0, 5, "Add Number");
-        new CalculatorAction("2", frame, gridConstraint, 1, 5, "Add Number");
-        new CalculatorAction("3", frame, gridConstraint, 2, 5, "Add Number");
-        new CalculatorAction("+", frame, gridConstraint, 3, 5, "Add");
-        new CalculatorAction("+/-", frame, gridConstraint, 0, 6, "Switch");
-        new CalculatorAction("0", frame, gridConstraint, 1, 6, "Add Number");
-        new CalculatorAction(".", frame, gridConstraint, 2, 6, "turn into decimal");
-        new CalculatorAction("=", frame, gridConstraint, 3, 6, "equals");
+        new CalculatorAction("%", frame, gridConstraint, 0, 1, "Percent", label);
+        new CalculatorAction("CE", frame, gridConstraint, 1, 1, "Clear Entry", label);
+        new CalculatorAction("C", frame, gridConstraint, 2, 1, "Clear", label);
+        new CalculatorAction("⌫", frame, gridConstraint, 3, 1, "Backspace", label);
+        new CalculatorAction("1/x", frame, gridConstraint, 0, 2, "Decimal Number", label);
+        new CalculatorAction("x²", frame, gridConstraint, 1, 2, "squared", label);
+        new CalculatorAction("√", frame, gridConstraint, 2, 2, "square root", label);
+        new CalculatorAction("/", frame, gridConstraint, 3, 2, "divide", label);
+        new CalculatorAction("7", frame, gridConstraint, 0, 3, "Add Number", label);
+        new CalculatorAction("8", frame, gridConstraint, 1, 3, "Add Number", label);
+        new CalculatorAction("9", frame, gridConstraint, 2, 3, "Add Number", label);
+        new CalculatorAction("x", frame, gridConstraint, 3, 3, "Multiply", label);
+        new CalculatorAction("4", frame, gridConstraint, 0, 4, "Add Number", label);
+        new CalculatorAction("5", frame, gridConstraint, 1, 4, "Add Number", label);
+        new CalculatorAction("6", frame, gridConstraint, 2, 4, "Add Number", label);
+        new CalculatorAction("-", frame, gridConstraint, 3, 4, "Subtraction", label);
+        new CalculatorAction("1", frame, gridConstraint, 0, 5, "Add Number", label);
+        new CalculatorAction("2", frame, gridConstraint, 1, 5, "Add Number", label);
+        new CalculatorAction("3", frame, gridConstraint, 2, 5, "Add Number", label);
+        new CalculatorAction("+", frame, gridConstraint, 3, 5, "Add", label);
+        new CalculatorAction("+/-", frame, gridConstraint, 0, 6, "Switch", label);
+        new CalculatorAction("0", frame, gridConstraint, 1, 6, "Add Number", label);
+        new CalculatorAction(".", frame, gridConstraint, 2, 6, "turn into decimal", label);
+        new CalculatorAction("=", frame, gridConstraint, 3, 6, "equals", label);
         frame.setVisible(true);
 
     }
 
-    @Override
+   /* @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (numberVariable != "") {
-            if (numberVariable.charAt(0) == '-') {
+        if (displayedNumberVal != "") {
+            if (displayedNumberVal.charAt(0) == '-') {
                 isMinus = true;
             }
         }
 
         if (e.getSource() == button0) {
-            if (numberVariable == "" || numberVariable == "0") numberVariable = "0";
+            if (displayedNumberVal == "" || displayedNumberVal == "0") displayedNumberVal = "0";
             else {
-                numberVariable = numberVariable + 0;
+                displayedNumberVal = displayedNumberVal + 0;
             }
             if (equals != "") {
                 character = 'e';
@@ -103,9 +102,9 @@ class Calculator implements ActionListener {
             }
         }
         if (e.getSource() == button1) {
-            if (numberVariable == "" || numberVariable == "0") numberVariable = "1";
+            if (displayedNumberVal == "" || displayedNumberVal == "0") displayedNumberVal = "1";
             else {
-                numberVariable = numberVariable + 1;
+                displayedNumberVal = displayedNumberVal + 1;
             }
             if (equals != "") {
                 character = 'e';
@@ -113,9 +112,9 @@ class Calculator implements ActionListener {
             }
         }
         if (e.getSource() == button2) {
-            if (numberVariable == "" || numberVariable == "0") numberVariable = "2";
+            if (displayedNumberVal == "" || displayedNumberVal == "0") displayedNumberVal = "2";
             else {
-                numberVariable = numberVariable + 2;
+                displayedNumberVal = displayedNumberVal + 2;
             }
             if (equals != "") {
                 character = 'e';
@@ -123,9 +122,9 @@ class Calculator implements ActionListener {
             }
         }
         if (e.getSource() == button3) {
-            if (numberVariable == "" || numberVariable == "0") numberVariable = "3";
+            if (displayedNumberVal == "" || displayedNumberVal == "0") displayedNumberVal = "3";
             else {
-                numberVariable = numberVariable + 3;
+                displayedNumberVal = displayedNumberVal + 3;
             }
             if (equals != "") {
                 character = 'e';
@@ -133,9 +132,9 @@ class Calculator implements ActionListener {
             }
         }
         if (e.getSource() == button4) {
-            if (numberVariable == "" || numberVariable == "0") numberVariable = "4";
+            if (displayedNumberVal == "" || displayedNumberVal == "0") displayedNumberVal = "4";
             else {
-                numberVariable = numberVariable + 4;
+                displayedNumberVal = displayedNumberVal + 4;
             }
             if (equals != "") {
                 character = 'e';
@@ -143,9 +142,9 @@ class Calculator implements ActionListener {
             }
         }
         if (e.getSource() == button5) {
-            if (numberVariable == "" || numberVariable == "0") numberVariable = "5";
+            if (displayedNumberVal == "" || displayedNumberVal == "0") displayedNumberVal = "5";
             else {
-                numberVariable = numberVariable + 5;
+                displayedNumberVal = displayedNumberVal + 5;
             }
             if (equals != "") {
                 character = 'e';
@@ -153,9 +152,9 @@ class Calculator implements ActionListener {
             }
         }
         if (e.getSource() == button6) {
-            if (numberVariable == "" || numberVariable == "0") numberVariable = "6";
+            if (displayedNumberVal == "" || displayedNumberVal == "0") displayedNumberVal = "6";
             else {
-                numberVariable = numberVariable + 6;
+                displayedNumberVal = displayedNumberVal + 6;
             }
             if (equals != "") {
                 character = 'e';
@@ -163,9 +162,9 @@ class Calculator implements ActionListener {
             }
         }
         if (e.getSource() == button7) {
-            if (numberVariable == "" || numberVariable == "0") numberVariable = "7";
+            if (displayedNumberVal == "" || displayedNumberVal == "0") displayedNumberVal = "7";
             else {
-                numberVariable = numberVariable + 7;
+                displayedNumberVal = displayedNumberVal + 7;
             }
             if (equals != "") {
                 character = 'e';
@@ -173,9 +172,9 @@ class Calculator implements ActionListener {
             }
         }
         if (e.getSource() == button8) {
-            if (numberVariable == "" || numberVariable == "0") numberVariable = "8";
+            if (displayedNumberVal == "" || displayedNumberVal == "0") displayedNumberVal = "8";
             else {
-                numberVariable = numberVariable + 8;
+                displayedNumberVal = displayedNumberVal + 8;
             }
             if (equals != "") {
                 character = 'e';
@@ -183,9 +182,9 @@ class Calculator implements ActionListener {
             }
         }
         if (e.getSource() == button9) {
-            if (numberVariable == "" || numberVariable == "0") numberVariable = "9";
+            if (displayedNumberVal == "" || displayedNumberVal == "0") displayedNumberVal = "9";
             else {
-                numberVariable = numberVariable + 9;
+                displayedNumberVal = displayedNumberVal + 9;
             }
             if (equals != "") {
                 character = 'e';
@@ -193,72 +192,72 @@ class Calculator implements ActionListener {
             }
         }
         if (e.getSource() == button1x) {
-            if (numberVariable == "0") System.out.println("CANNOT DIVIDE BY 0");
+            if (displayedNumberVal == "0") System.out.println("CANNOT DIVIDE BY 0");
             else {
-                numberVariable = String.valueOf(1 / Double.valueOf(numberVariable));
+                displayedNumberVal = String.valueOf(1 / Double.valueOf(displayedNumberVal));
             }
         }
         if (e.getSource() == buttonCE) {
-            if (numberVariable == "") {
+            if (displayedNumberVal == "") {
                 numberMain = "";
                 character = 'e';
-                numberVariable = "0";
+                displayedNumberVal = "0";
             } else {
-                numberVariable = "0";
+                displayedNumberVal = "0";
             }
         }
         if (e.getSource() == buttonC) {
-            numberVariable = "0";
+            displayedNumberVal = "0";
             numberMain = "";
             character = 'e';
         }
         if (e.getSource() == buttonSwitch) {
-            if (numberVariable != "0" && !isMinus) {
+            if (displayedNumberVal != "0" && !isMinus) {
                 isMinus = true;
-                numberVariable = "-" + numberVariable;
+                displayedNumberVal = "-" + displayedNumberVal;
             } else if (isMinus) {
-                numberVariable = numberVariable.replace("-", "");
+                displayedNumberVal = displayedNumberVal.replace("-", "");
                 isMinus = false;
             }
         }
         if (e.getSource() == buttonBackSpace) {
-            if (numberVariable != "0" && numberVariable.length() != 1) {
-                numberVariable = removeLast(numberVariable);
-                if (numberVariable.charAt(0) == '-' && numberVariable.length() == 1) {
-                    numberVariable = "0";
+            if (displayedNumberVal != "0" && displayedNumberVal.length() != 1) {
+                displayedNumberVal = removeLast(displayedNumberVal);
+                if (displayedNumberVal.charAt(0) == '-' && displayedNumberVal.length() == 1) {
+                    displayedNumberVal = "0";
                 }
-            } else numberVariable = "0";
+            } else displayedNumberVal = "0";
         }
         if (e.getSource() == buttonSquared) {
             if (equals != "") {
-                numberVariable = equals;
+                displayedNumberVal = equals;
                 numberMain = "";
             }
-            numberVariable = String.valueOf(Double.valueOf(numberVariable) * Double.valueOf(numberVariable));
-            numberVariable = trimmer(numberVariable);
+            displayedNumberVal = String.valueOf(Double.valueOf(displayedNumberVal) * Double.valueOf(displayedNumberVal));
+            displayedNumberVal = trimmer(displayedNumberVal);
         }
         if (e.getSource() == buttonSquareRoot) {
             if (equals != "") {
-                numberVariable = equals;
+                displayedNumberVal = equals;
                 numberMain = "";
             }
-            numberVariable = String.valueOf(Math.sqrt(Double.valueOf(numberVariable)));
-            numberVariable = trimmer(numberVariable);
+            displayedNumberVal = String.valueOf(Math.sqrt(Double.valueOf(displayedNumberVal)));
+            displayedNumberVal = trimmer(displayedNumberVal);
         }
         if (e.getSource() == buttonDot) {
             if (!isFloat) {
-                numberVariable = numberVariable + ".";
+                displayedNumberVal = displayedNumberVal + ".";
             }
         }
         if (e.getSource() == buttonPercent) {
             if (numberMain == "") {
-                numberVariable = "0";
+                displayedNumberVal = "0";
             } else {
-                numberVariable = String.valueOf(Double.valueOf(numberVariable) * 0.01);
+                displayedNumberVal = String.valueOf(Double.valueOf(displayedNumberVal) * 0.01);
             }
         }
         if (e.getSource() == buttonDivide) {
-            if (numberVariable == "0" && numberMain != "") {
+            if (displayedNumberVal == "0" && numberMain != "") {
                 System.out.println("CANNOT DIVIDE BY 0");
 
             } else if (equals != "") {
@@ -266,13 +265,13 @@ class Calculator implements ActionListener {
                 character = '/';
                 equals = "";
             } else if (numberMain == "") {
-                numberMain = numberVariable;
+                numberMain = displayedNumberVal;
                 character = '/';
-                numberVariable = "";
-            } else if (numberVariable != "") {
-                numberMain = String.valueOf(Double.valueOf(numberMain) / Double.valueOf(numberVariable));
+                displayedNumberVal = "";
+            } else if (displayedNumberVal != "") {
+                numberMain = String.valueOf(Double.valueOf(numberMain) / Double.valueOf(displayedNumberVal));
                 numberMain = trimmer(numberMain);
-                numberVariable = "";
+                displayedNumberVal = "";
             }
         }
         if (e.getSource() == buttonX) {
@@ -281,13 +280,13 @@ class Calculator implements ActionListener {
                 character = 'x';
                 equals = "";
             } else if (numberMain == "") {
-                numberMain = numberVariable;
+                numberMain = displayedNumberVal;
                 character = 'x';
-                numberVariable = "";
-            } else if (numberVariable != "") {
-                numberMain = String.valueOf(Double.valueOf(numberMain) * Double.valueOf(numberVariable));
+                displayedNumberVal = "";
+            } else if (displayedNumberVal != "") {
+                numberMain = String.valueOf(Double.valueOf(numberMain) * Double.valueOf(displayedNumberVal));
                 numberMain = trimmer(numberMain);
-                numberVariable = "";
+                displayedNumberVal = "";
             }
         }
         if (e.getSource() == buttonPlus) {
@@ -296,15 +295,15 @@ class Calculator implements ActionListener {
                 character = '+';
                 equals = "";
             } else if (numberMain == "") {
-                numberMain = numberVariable;
+                numberMain = displayedNumberVal;
                 character = '+';
-                numberVariable = "";
-            } else if (numberVariable != "") {
-                numberMain = String.valueOf(Double.valueOf(numberMain) + Double.valueOf(numberVariable));
+                displayedNumberVal = "";
+            } else if (displayedNumberVal != "") {
+                numberMain = String.valueOf(Double.valueOf(numberMain) + Double.valueOf(displayedNumberVal));
 
                 numberMain = trimmer(numberMain);
 
-                numberVariable = "";
+                displayedNumberVal = "";
             }
         }
         if (e.getSource() == buttonMinus) {
@@ -313,17 +312,17 @@ class Calculator implements ActionListener {
                 character = '-';
                 equals = "";
             } else if (numberMain == "") {
-                numberMain = numberVariable;
+                numberMain = displayedNumberVal;
                 character = '-';
-                numberVariable = "";
-            } else if (numberVariable != "") {
-                numberMain = String.valueOf(Double.valueOf(numberMain) - Double.valueOf(numberVariable));
+                displayedNumberVal = "";
+            } else if (displayedNumberVal != "") {
+                numberMain = String.valueOf(Double.valueOf(numberMain) - Double.valueOf(displayedNumberVal));
                 numberMain = trimmer(numberMain);
-                numberVariable = "";
+                displayedNumberVal = "";
             }
         }
-        for (int i = 0; i < numberVariable.length(); i++) {
-            if (numberVariable.charAt(i) == '.') {
+        for (int i = 0; i < displayedNumberVal.length(); i++) {
+            if (displayedNumberVal.charAt(i) == '.') {
                 isFloat = true;
                 break;
 
@@ -331,50 +330,8 @@ class Calculator implements ActionListener {
                 isFloat = false;
             }
         }
-        if (e.getSource() != buttonEquals) {
-            temp1 = "";
-            temp2 = "";
-            System.out.println(" ");
-            System.out.print(numberMain);
-            if (character != 'e') {
-                System.out.print(" " + character + " ");
-                label.setText(numberMain + " " + character + " " + numberVariable);
-            } else {
-                if (numberVariable == "") {
-                    label.setText("0");
-                } else label.setText(numberVariable);
-            }
-            System.out.print(numberVariable);
 
-        } else {
-            if (temp1 == "" && temp2 == "") {
-                temp1 = numberMain;
-                temp2 = numberVariable;
-            }
-            switch (character) {
-                case '+':
-                    equals = String.valueOf(Double.valueOf(temp1) + Double.valueOf(temp2));
-                    break;
-                case '-':
-                    equals = String.valueOf(Double.valueOf(temp1) - Double.valueOf(temp2));
-                    break;
-                case 'x':
-                    equals = String.valueOf(Double.valueOf(temp1) * Double.valueOf(temp2));
-                    break;
-                case '/':
-                    equals = String.valueOf(Double.valueOf(temp1) / Double.valueOf(temp2));
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + character);
-            }
-            equals = trimmer(equals);
-            label.setText(temp1 + " " + character + " " + temp2 + " = " + equals);
-            temp1 = equals;
-            numberVariable = "0";
-            numberMain = "";
-        }
-
-    }
+    }*/
 }
 
 public class Main {
