@@ -53,6 +53,7 @@ public class CalculatorAction extends Action {
             isNegative = true;
         }
 
+
         updateFloatFlag();
         switch (action) {
             case "Add Number": addNumber(); break;
