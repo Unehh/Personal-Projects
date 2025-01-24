@@ -50,6 +50,7 @@ class Calculator {
         gridConstraint.gridy = 0;
         frame.add(label, gridConstraint);
         history = new JPanel();
+
         history.setLayout(new BoxLayout (history,BoxLayout.Y_AXIS));
         history.setSize((int) (frame.getWidth() * 0.2),frame.getHeight());
         gridConstraint.gridheight = 7;
