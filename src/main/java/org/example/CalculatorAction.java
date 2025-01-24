@@ -52,6 +52,7 @@ public class CalculatorAction extends Action {
         if (!numberVal.isEmpty() && numberVal.charAt(0) == '-') {
             isNegative = true;
         }
+
         updateFloatFlag();
         switch (action) {
             case "Add Number": addNumber(); break;
