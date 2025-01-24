@@ -12,5 +12,6 @@ abstract class Action {
         gridConstraint.gridy = gridY;
         frame.add(button, gridConstraint);
     }
+
     abstract void performAction();
 }
